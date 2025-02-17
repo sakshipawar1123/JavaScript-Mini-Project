@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Tic Tac Toe Game</h1>
+    <p id="message">Player X's Turn</p>
+
+    <table id="gameBoard">
+        <tr>
+            <td id="cell0"></td>
+            <td id="cell1"></td>
+            <td id="cell2"></td>
+        </tr>
+        <tr>
+            <td id="cell3"></td>
+            <td id="cell4"></td>
+            <td id="cell5"></td>
+        </tr>
+        <tr>
+            <td id="cell6"></td>
+            <td id="cell7"></td>
+            <td id="cell8"></td>
+        </tr>
+    </table>
+    <button id="resetButton">Restart Game</button>
+    <script>
+        //Fetch all ID`s
+        var gameBoard = document.getElementById("gameBoard");
+        var message = document.getElementById("message");
+        var resetButton = document.getElementById("resetButton");
+        var cells = document.getElementsByTagName("td");
+
+        //create game variable
+        var board = ["", "", "", "", "", "", "", "", ""];
+        var currentPlayer = "X";
+        var gameActive = true;
+
+        //event listener for the table
+        gameBoard.addEventListener("click", function(event) {
+            var clickedCell = event.target;
+            var index = getCellIndex(clickedCell);
+        
+            if (index !== -1 && board[index] === "" && gameActive) {
+                Move(index, clickedCell);
+            }
+        });
+
+        //Function to get the clicked cell index
+        function getCellIndex(cell) {
+            for (var i = 0; i < cells.length; i++) {
+                if (cells[i] === cell) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        //Function to handle a move
+        function Move(index, cell) {
+            board[index] = currentPlayer;
+            cell.textContent = currentPlayer;
+        
+            if (checkWinner()) {
+                message.textContent = currentPlayer + " Wins!";
+                gameActive = false;
+            } else if (board.indexOf("") === -1) {       //indexOf()=it provides the position of a char value present in a given string.
+                message.textContent = "It's a Draw!";
+                gameActive = false;
+            } else {
+                currentPlayer = (currentPlayer === "X") ? "O" : "X";
+                message.textContent = "Player " + currentPlayer + "'s Turn";
+            }
+        }
+
+        // Function to check for a winner
+        function checkWinner() {
+            var winningCondition = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+        
+            for (var i = 0; i < winningCondition.length; i++) {
+                var a = winningCondition[i][0];
+                var b = winningCondition[i][1];
+                var c = winningCondition[i][2];
+        
+                if (board[a] !== "" && board[a] === board[b] && board[a] === board[c]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //Function to reset the game 
+        resetButton.addEventListener("click", function() {
+            board = ["", "", "", "", "", "", "", "", ""];
+            gameActive = true;
+            currentPlayer = "X";
+            message.textContent = "Player X's Turn";
+        
+            for (var i = 0; i < cells.length; i++) {
+                cells[i].textContent = "";
+            }
+        });
+        
+
+    </script>
+</body>
+</html>

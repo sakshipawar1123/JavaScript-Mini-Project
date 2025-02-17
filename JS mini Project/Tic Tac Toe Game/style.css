@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: red;
+}
+
+#message {
+    font-size: 20px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color:lightblue;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+td {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Hover effect */
+td:hover {
+    background-color: #e0e0e0;
+}
+
+/* X and O Colors */
+.x {
+    color: #ff5733;
+}
+
+.o {
+    color: #3498db;
+}
+
+/* Styled message */
+.winner {
+    color: #27ae60;
+    font-size: 22px;
+}
+
+.draw {
+    color: #e74c3c;
+    font-size: 22px;
+}
+
+/* Reset button */
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
